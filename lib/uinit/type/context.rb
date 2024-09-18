@@ -48,7 +48,7 @@ module Uinit
         SetOf.new(type)
       end
 
-      def typeof(type)
+      def type_of(type)
         TypeOf.new(type)
       end
 
