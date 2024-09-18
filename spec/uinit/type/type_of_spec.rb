@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 # rubocop:disable Lint/ConstantDefinitionInBlock
-RSpec.describe Uinit::Type::Extend do
+RSpec.describe Uinit::Type::TypeOf do
   module ModuleOk; end
 
   module ModuleKo; end
@@ -25,7 +25,7 @@ RSpec.describe Uinit::Type::Extend do
 
     let(:val) { nil }
 
-    context 'when extends ModuleKo' do
+    context 'when include ModuleKo' do
       let(:val) { TestOk }
 
       it 'returns true' do
@@ -33,7 +33,7 @@ RSpec.describe Uinit::Type::Extend do
       end
     end
 
-    context 'when extends ModuleKo' do
+    context 'when include ModuleKo' do
       let(:val) { TestKo }
 
       it 'returns false' do
@@ -51,7 +51,7 @@ RSpec.describe Uinit::Type::Extend do
 
     let(:val) { nil }
 
-    context 'when extends ModuleOk' do
+    context 'when include ModuleOk' do
       let(:val) { TestOk }
 
       it 'does not raise' do
@@ -59,13 +59,13 @@ RSpec.describe Uinit::Type::Extend do
       end
     end
 
-    context 'when not impl meth_b' do
+    context 'when include ModuleKo' do
       let(:val) { TestKo }
 
       it 'raises' do
         expect do
           check
-        end.to raise_error(Uinit::Type::Error, /TestKo does not extend ModuleOk/)
+        end.to raise_error(Uinit::Type::Error, /TestKo does not extend or include or preprend ModuleOk/)
       end
     end
   end

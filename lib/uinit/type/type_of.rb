@@ -2,7 +2,7 @@
 
 module Uinit
   module Type
-    class Extend < Base
+    class TypeOf < Base
       def self.from?(value)
         value.is_a?(Class) || value.is_a?(Module)
       end
@@ -33,7 +33,7 @@ module Uinit
 
         return value if value.ancestors.include?(class_module)
 
-        type_error!("#{value.inspect} does not extend #{class_module}", depth)
+        type_error!("#{value.inspect} does not extend or include or preprend #{class_module}", depth)
       end
 
       def inspect

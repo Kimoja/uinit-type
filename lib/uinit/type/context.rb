@@ -48,8 +48,8 @@ module Uinit
         SetOf.new(type)
       end
 
-      def extends(type)
-        Extend.new(type)
+      def typeof(type)
+        TypeOf.new(type)
       end
 
       def nilable
