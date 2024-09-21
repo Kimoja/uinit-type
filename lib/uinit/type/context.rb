@@ -5,12 +5,12 @@ module Uinit
     module Context
       Nil = Const[nil].freeze
       Boolean = (Const[true] | Const[false]).freeze
-      Str = Instance[String].freeze
-      Int = Instance[Integer].freeze
-      Float = Instance[Float].freeze
-      Hsh = Instance[Hash].freeze
-      Arr = Instance[Array].freeze
-      Sym = Instance[Symbol].freeze
+      Str = TypeOf[String].freeze
+      Sym = TypeOf[Symbol].freeze
+      Int = TypeOf[Integer].freeze
+      Float = TypeOf[Float].freeze
+      Hsh = TypeOf[Hash].freeze
+      Arr = TypeOf[Array].freeze
 
       def array_of(type)
         ArrayOf.new(type)
@@ -40,12 +40,12 @@ module Uinit
         Impl.new(*, **)
       end
 
-      def instance(type)
-        Instance.new(type)
-      end
-
       def set_of(type) # rubocop:disable Naming/AccessorMethodName
         SetOf.new(type)
+      end
+
+      def type(type = BasicObject)
+        Type.new(type)
       end
 
       def type_of(type)

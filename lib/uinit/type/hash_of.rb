@@ -18,7 +18,7 @@ module Uinit
 
         @schema =
           schema.transform_values do |type|
-            Type.from(type)
+            ::Uinit::Type.from(type)
           end
 
         @strict = !!strict

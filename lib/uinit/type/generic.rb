@@ -6,7 +6,7 @@ module Uinit
       def initialize(type)
         super()
 
-        @type = Type.from(type)
+        @type = ::Uinit::Type.from(type)
       end
 
       attr_reader :type

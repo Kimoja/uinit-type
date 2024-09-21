@@ -9,7 +9,7 @@ module Uinit
       def initialize(operand, compositions = [])
         super()
 
-        @operand = Type.from(operand)
+        @operand = ::Uinit::Type.from(operand)
         @compositions = compositions
       end
 
@@ -86,7 +86,7 @@ module Uinit
       private
 
       def add_composition(operator, operand)
-        compositions << [operator, Type.from(operand)]
+        compositions << [operator, ::Uinit::Type.from(operand)]
 
         self
       end

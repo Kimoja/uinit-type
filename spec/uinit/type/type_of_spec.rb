@@ -2,42 +2,26 @@
 
 require 'spec_helper'
 
-# rubocop:disable Lint/ConstantDefinitionInBlock
 RSpec.describe Uinit::Type::TypeOf do
-  module ModuleOk; end
-
-  module ModuleKo; end
-
-  class TestOk
-    include ModuleOk
-  end
-
-  class TestKo
-    include ModuleKo
-  end
-
   describe '#is?' do
     subject(:check) { type.is?(val) }
 
-    let(:type) do
-      described_class.new(ModuleOk)
-    end
-
+    let(:type) { described_class[String] }
     let(:val) { nil }
 
-    context 'when include ModuleKo' do
-      let(:val) { TestOk }
-
-      it 'returns true' do
-        expect(check).to be(true)
-      end
-    end
-
-    context 'when include ModuleKo' do
-      let(:val) { TestKo }
+    context 'when not an instance of' do
+      let(:val) { 123 }
 
       it 'returns false' do
         expect(check).to be(false)
+      end
+    end
+
+    context 'when an instance of' do
+      let(:val) { 'ok' }
+
+      it 'returns true' do
+        expect(check).to be(true)
       end
     end
   end
@@ -45,29 +29,23 @@ RSpec.describe Uinit::Type::TypeOf do
   describe '#is!' do
     subject(:check) { type.is!(val) }
 
-    let(:type) do
-      described_class.new(ModuleOk)
-    end
-
+    let(:type) { described_class[String] }
     let(:val) { nil }
 
-    context 'when include ModuleOk' do
-      let(:val) { TestOk }
+    context 'when not an instance of' do
+      let(:val) { 123 }
+
+      it 'raises' do
+        expect { check }.to raise_error(Uinit::Type::Error, /123 must be an instance of String/)
+      end
+    end
+
+    context 'when an instance of' do
+      let(:val) { 'ok' }
 
       it 'does not raise' do
         expect { check }.not_to raise_error
       end
     end
-
-    context 'when include ModuleKo' do
-      let(:val) { TestKo }
-
-      it 'raises' do
-        expect do
-          check
-        end.to raise_error(Uinit::Type::Error, /TestKo does not extend or include or preprend ModuleOk/)
-      end
-    end
   end
 end
-# rubocop:enable Lint/ConstantDefinitionInBlock

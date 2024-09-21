@@ -3,17 +3,18 @@
 module Uinit
   module Type
     class TypeOf < Base
-      def self.from?(value)
-        value.is_a?(Class) || value.is_a?(Module)
+      def self.from?(class_module)
+        class_module.is_a?(::Class) || class_module.is_a?(::Module)
       end
 
-      def self.from(value)
-        new(value) if from?(value)
+      def self.from(class_module)
+        new(class_module) if from?(class_module)
       end
 
-      # TODO: Allow to pass Fn
       def initialize(class_module)
         super()
+
+        raise ArgumentError, 'class_module must be a Class or a Module' unless self.class.from?(class_module)
 
         @class_module = class_module
       end
@@ -21,19 +22,13 @@ module Uinit
       attr_reader :class_module
 
       def is?(value)
-        return false unless value.is_a?(Class) || value.is_a?(Module)
-
-        value.ancestors.include?(class_module)
+        value.is_a?(class_module)
       end
 
       def check!(value, depth)
-        unless value.is_a?(Class) || value.is_a?(Module)
-          type_error!("#{value.inspect} is not a Class or a Module", depth)
-        end
+        return value if is?(value)
 
-        return value if value.ancestors.include?(class_module)
-
-        type_error!("#{value.inspect} does not extend or include or preprend #{class_module}", depth)
+        type_error!("#{value.inspect} must be an instance of #{class_module}", depth)
       end
 
       def inspect
