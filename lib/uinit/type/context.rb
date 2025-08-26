@@ -5,10 +5,7 @@ module Uinit
     module Context
       Nil = Const[nil].freeze
       Boolean = (Const[true] | Const[false]).freeze
-      Str = String.freeze
       Sym = TypeOf[Symbol].freeze
-      Int = Integer.freeze
-      Float = Float.freeze
       Hsh = TypeOf[Hash].freeze
       Arr = TypeOf[Array].freeze
 
@@ -52,6 +49,20 @@ module Uinit
         TypeOf.new(type)
       end
 
+      def string(**)
+        String.new(**)
+      end
+      alias str string
+
+      def integer(**)
+        Integer.new(**)
+      end
+      alias int integer
+
+      def float(**)
+        Float.new(**)
+      end
+
       def nilable
         Nil
       end
@@ -62,20 +73,6 @@ module Uinit
         Boolean
       end
       alias bool boolean
-
-      def string
-        Str
-      end
-      alias str string
-
-      def integer
-        Int
-      end
-      alias int integer
-
-      def float
-        Float
-      end
 
       def hash
         Hsh
