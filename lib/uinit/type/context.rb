@@ -5,10 +5,10 @@ module Uinit
     module Context
       Nil = Const[nil].freeze
       Boolean = (Const[true] | Const[false]).freeze
-      Str = TypeOf[String].freeze
+      Str = String.freeze
       Sym = TypeOf[Symbol].freeze
-      Int = TypeOf[Integer].freeze
-      Float = TypeOf[Float].freeze
+      Int = Integer.freeze
+      Float = Float.freeze
       Hsh = TypeOf[Hash].freeze
       Arr = TypeOf[Array].freeze
 
@@ -32,15 +32,15 @@ module Uinit
         Fn.new(arity)
       end
 
-      def hash_of(schema, strict: false)
-        HashOf.new(schema, strict:)
+      def schema(schema, strict: false)
+        Schema.new(schema, strict:)
       end
 
       def impl(*, **)
         Impl.new(*, **)
       end
 
-      def set_of(type) # rubocop:disable Naming/AccessorMethodName
+      def set_of(type)
         SetOf.new(type)
       end
 

@@ -44,8 +44,6 @@ module Uinit
         is
       end
 
-      # rubocop:disable Metrics/AbcSize
-      # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/PerceivedComplexity
       def check!(value, depth)
         errors = []

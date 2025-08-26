@@ -2,7 +2,7 @@
 
 module Uinit
   module Type
-    class HashOf < Base
+    class Schema < Base
       def self.from?(schema)
         schema.is_a?(Hash)
       end

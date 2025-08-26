@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Uinit::Type::HashOf do
+RSpec.describe Uinit::Type::Schema do
   describe '#is?' do
     subject(:check) { type.is?(val) }
 

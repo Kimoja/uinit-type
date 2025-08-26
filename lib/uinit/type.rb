@@ -21,7 +21,7 @@ module Uinit
 
     def self.from(arg)
       klass =
-        [Base, TypeOf, ArrayOf, SetOf, HashOf, Check, Type, Const].find do |type_class|
+        [Base, TypeOf, ArrayOf, SetOf, Schema, Check, Type, Const].find do |type_class|
           type_class.from?(arg)
         end
 

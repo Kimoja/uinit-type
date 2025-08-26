@@ -7,7 +7,7 @@ module Uinit
       def initialize(arity = -1)
         super()
 
-        raise ArgumentError, 'arity must be an Integer' unless arity.is_a?(Integer)
+        raise ArgumentError, 'arity must be an Integer' unless arity.is_a?(::Integer)
 
         @arity = arity
       end
